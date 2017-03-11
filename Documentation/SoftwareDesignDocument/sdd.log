@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2017.1.8)  9 MAR 2017 18:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2017.1.8)  11 MAR 2017 12:32
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -631,7 +631,7 @@ LaTeX Info: Redefining \nameref on input line 9.
 \@outlinefile=\write3
 \openout3 = `sdd.out'.
 
- <IIIT-B_logo.jpg, id=4, 185.69376pt x 173.64874pt>
+ <IIIT-B_logo.jpg, id=16, 185.69376pt x 173.64874pt>
 File: IIIT-B_logo.jpg Graphic file (type jpg)
 
 <use IIIT-B_logo.jpg>
@@ -658,32 +658,40 @@ been already used, duplicate ignored
                    \relax 
 l.39 \newpage
               [1]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 43.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 43.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 54.
+ [2]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 54.
  (./sdd.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 43.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 43.
-Package rerunfilecheck Info: File `sdd.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 43.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 54.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 54.
+
+
+Package rerunfilecheck Warning: File `sdd.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `sdd.out':
+(rerunfilecheck)             Before: 513049118FB0335A046173BA5779A24C;175
+(rerunfilecheck)             After:  21CC110C1E19A30D946EB4557834BA10;243.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 54.
  ) 
 Here is how much of TeX's memory you used:
- 6276 strings out of 493013
- 87249 string characters out of 6139318
- 174132 words of memory out of 5000000
- 9754 multiletter control sequences out of 15000+600000
- 6698 words of font info for 24 fonts, out of 8000000 for 9000
+ 6286 strings out of 493013
+ 87341 string characters out of 6139318
+ 175132 words of memory out of 5000000
+ 9759 multiletter control sequences out of 15000+600000
+ 7005 words of font info for 25 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,4n,26p,235b,356s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,4n,28p,358b,356s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mti12.pfb>
-Output written on sdd.pdf (2 pages, 72997 bytes).
+Output written on sdd.pdf (3 pages, 81631 bytes).
 PDF statistics:
- 40 PDF objects out of 1000 (max. 8388607)
- 29 compressed objects within 1 object stream
- 5 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 63 PDF objects out of 1000 (max. 8388607)
+ 51 compressed objects within 1 object stream
+ 10 named destinations out of 1000 (max. 500000)
+ 30 words of extra memory for PDF output out of 10000 (max. 10000000)
 
