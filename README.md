@@ -12,6 +12,10 @@ Refer
 
 > 1. General Transit Feed Specification (GTFS) https://en.wikipedia.org/wiki/General_Transit_Feed_Specification, https://developers.google.com/transit/gtfs/
 > 2. OpenStreetMap, https://en.wikipedia.org/wiki/OpenStreetMap
+> 3. QGIS, http://www.qgis.org/en/site/about/features.html 
+
+> 4. BMRC, http://www.bmrc.co.in/English/MetroTimings.htm, https://en.wikipedia.org/wiki/Namma_Metro
+> 5. BMTC, https://www.mybmtc.com/, https://play.google.com/store/apps/details?id=com.karthik253bc.mybmtc&hl=en
 
 
 ### Existing Open Source Solutions 
@@ -21,3 +25,8 @@ Refer
 #### Reference 
 
 >  1. Intermodal journey planner (IJP), https://en.wikipedia.org/wiki/Intermodal_journey_planner
+
+#### Papers
+
+1. http://users.ece.utexas.edu/~nikolova/papers/BoteaNikolovaBerlingerio-ICAPS13.pdf
+2. http://i11www.iti.uni-karlsruhe.de/extra/publications/p-mmrp-09.pdf

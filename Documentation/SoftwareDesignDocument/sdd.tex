@@ -16,7 +16,7 @@
 	{\scshape\Large Software Design Document\par}
 	{\Large DS 703 Geographic Information Systems\par}
 	\vspace{1.5cm}
-	{\huge\bfseries Multi Modal Route Planning\par}
+	{\huge\bfseries Multimodal Route Planning\par}
 	\vspace{2cm}	   
 	{\Large\itshape Anoop Toffy - MT2016016\par}
 	{\Large\itshape Mehul Singh - MT2016083\par}		 
@@ -39,15 +39,25 @@
 \newpage
 
 \section{Problem Statement}
-Multi Modal Route Planning is to provide the user with optimal, feasible and personalized route plan between a given source and destination. The system is designed to provide various travel approaches and provides user the flexibility to choose from different modes of transport.
+For a traveler it is often reliable when it comes to use different modes of transport for a single travel whenever it is available. But there lacks efficient systems to find out, even though there are system that aid traveler to choose different modes of transport, such as Google Transit. \\
+Multimodal Route Planning(MRP) is system that provides the traveler with optimal, feasible and personalized route plan between a given source and destination. The system is designed to provide various public travel approaches (like bus riding, metro travel) and provides traveler the flexibility to choose from different modes of transport.
+
+Fully featured MRP will be able to provide real-time information along the planned routes.
 
 \section{Data Collection and Preprocessing}
 
-The bus and metro schedule is collected from the Bengaluru Metropolitan Transport Corporation and Bangaluru Metro departments. It is then represented as graphs using the spatial data collected using the software QGIS and Transcad. Thus we arrive at the networks with which we can work on and apply heuristics approach to find out the optimal route.
+The bus and metro schedules are collected from the Bengaluru Metropolitan Transport Corporation (from GPS records) and Bangaluru Metro departments. It is then represented as graphs (transportation networks) from the spatial data collected using the software QGIS. 
 
-\section{Algorithm for Multi Modal Route Planning}
 
-The proposed algorithm for calculating the Optimal Multi Modal Route is as given below:
+\section{Algorithm for Multimodal Route Planning}
+
+In the simplest form the algorithms for journey planning is a shortest path problem from the given start location to the destination. MRP helps traveler combine various modes of transport like bus riding and metro travel for a single trip by using heuristics approach. 
+
+The algorithm proposed here used acceptable heuristics to provide a deterministic solution to mutlimodal routing problem from the transportation network data gathered from  graph network. The general solution is NP Hard since there is always a level of non determinism which involves boarding of the bus which can either succeed or fail.
+
+In MRP there a multiple quality criteria such as travel time, number of interchanges, cost etc.
+
+
 
 \section{Flow Diagrams}
 
