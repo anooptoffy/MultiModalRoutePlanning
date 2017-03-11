@@ -58,14 +58,21 @@ The algorithm proposed here used acceptable heuristics to provide a deterministi
 In MRP there a multiple quality criteria such as travel time, number of interchanges, cost etc.
 
 \subsection{Input description}
-
+The spatial data is plotted in OpenStreetMap using WSG 84 datum using QGIS software and corresponding network is generated from it. This network is used to find the shortest feasible route to travel from a given location.
 \subsection{Algorithms}
+The algorithm use probabilistic heuristics to find out optimal path between source and destination by incorporating various modes of travel selected by the traveler.
 
 \subsection{Output}
+A optimal path is returned by the program as the ouptut.
 
 \section{Flow Diagrams}
 
 \subsection{End user flow}
-
+\begin{figure}[!hp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{flowcharts/basicflow.jpg}
+    \caption{End user}
+    \label{fig:Enduser flow}
+\end{figure}
 \subsection{Back end flow}
 \end{document}
