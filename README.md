@@ -10,8 +10,8 @@ Here we focus on developing a MMRP for Bangalore city by incorporating the Bus r
 
 Refer 
 
-> General Transit Feed Specification (GTFS) https://en.wikipedia.org/wiki/General_Transit_Feed_Specification, https://developers.google.com/transit/gtfs/
-> OpenStreetMap, https://en.wikipedia.org/wiki/OpenStreetMap
+> 1. General Transit Feed Specification (GTFS) https://en.wikipedia.org/wiki/General_Transit_Feed_Specification, https://developers.google.com/transit/gtfs/
+> 2. OpenStreetMap, https://en.wikipedia.org/wiki/OpenStreetMap
 
 
 ### Existing Open Source Solutions 
@@ -20,4 +20,4 @@ Refer
 
 #### Reference 
 
->  Intermodal journey planner (IJP), https://en.wikipedia.org/wiki/Intermodal_journey_planner
+>  1. Intermodal journey planner (IJP), https://en.wikipedia.org/wiki/Intermodal_journey_planner
