@@ -38,15 +38,14 @@
 \listoftables
 \newpage
 
-\section{Problem Statement}
-For a traveler it is often reliable when it comes to use different modes of transport for a single travel whenever it is available. But there lacks efficient systems to find out, even though there are system that aid traveler to choose different modes of transport, such as Google Transit. \\
+\section{Problem Description}
+For a traveler it is often reliable when it comes to use different modes of transport for a single travel whenever it is available. But there lacks efficient systems to find out, even though there are systems that aid traveler to choose different modes of transport, such as Google Transit. \\
 Multimodal Route Planning(MRP) is system that provides the traveler with optimal, feasible and personalized route plan between a given source and destination. The system is designed to provide various public travel approaches (like bus riding, metro travel) and provides traveler the flexibility to choose from different modes of transport.
 
-Fully featured MRP will be able to provide real-time information along the planned routes.
 
 \section{Data Collection and Preprocessing}
 
-The bus and metro schedules are collected from the Bengaluru Metropolitan Transport Corporation (from GPS records) and Bangaluru Metro departments. It is then represented as graphs (transportation networks) from the spatial data collected using the software QGIS. 
+The bus and metro schedules are collected from the Bengaluru Metropolitan Transport Corporation (from GPS records) and Bengaluru Metro departments. It is then represented as graphs (transportation networks) from the spatial data collected using the software QGIS. 
 
 
 \section{Algorithm for Multimodal Route Planning}
@@ -55,30 +54,36 @@ In the simplest form the algorithms for journey planning is a shortest path prob
 
 The algorithm proposed here used acceptable heuristics to provide a deterministic solution to mutlimodal routing problem from the transportation network data gathered from  graph network. The general solution is NP Hard since there is always a level of non determinism which involves boarding of the bus which can either succeed or fail.
 
-In MRP there a multiple quality criteria such as travel time, number of interchanges, cost etc.
+In MRP there are multiple quality criteria such as travel time, number of interchanges, cost etc.
 
 \subsection{Input description}
-The spatial data is plotted in OpenStreetMap using WSG 84 datum using QGIS software and corresponding network is generated from it. This network is used to find the shortest feasible route to travel from a given location.
+The spatial data can be plotted on OpenStreetMap or Google Maps using WGS 84 datum via softwares like QGIS and corresponding network is generated from it. This network is used to find the shortest feasible route to travel from a given location.
+
 \subsection{Algorithms}
 The algorithm use probabilistic heuristics to find out optimal path between source and destination by incorporating various modes of travel selected by the traveler.
 
 \subsection{Output}
-A optimal path is returned by the program as the ouptut.
+An optimal route is returned by the system as the ouptut.
+
+\newpage
 
 \section{Flow Diagrams}
 
 \subsection{End user flow}
 \begin{figure}[!hp]
     \centering
-    \includegraphics[width=0.8\textwidth]{flowcharts/basicflow.jpg}
+    \includegraphics[width=1.25\textwidth]{flowcharts/basicflow.jpg}
     \caption{End user}
     \label{fig:Enduser flow}
 \end{figure}
+
+\newpage
+
 \subsection{Back end flow}
 
 \begin{figure}[!hp]
     \centering
-    \includegraphics[width=0.8\textwidth]{flowcharts/backend.jpg}
+    \includegraphics[width=1.25\textwidth]{flowcharts/backend.jpg}
     \caption{backend}
     \label{fig:backend flow}
 \end{figure}
