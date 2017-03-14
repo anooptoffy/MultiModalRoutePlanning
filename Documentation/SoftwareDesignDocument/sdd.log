@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2017.1.8)  12 MAR 2017 23:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2017.1.8)  14 MAR 2017 12:50
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -564,7 +564,11 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
 \Hy@SectionHShift=\skip49
-) (./sdd.aux)
+) (./sdd.aux
+
+LaTeX Warning: Label `fig:Enduser flow' multiply defined.
+
+)
 \openout1 = `sdd.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
@@ -581,8 +585,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
 LaTeX Font Info:    ... okay on input line 9.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 9.
 LaTeX Font Info:    ... okay on input line 9.
-
-(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count110
 \scratchdimen=\dimen118
@@ -631,7 +634,7 @@ LaTeX Info: Redefining \nameref on input line 9.
 \@outlinefile=\write3
 \openout3 = `sdd.out'.
 
- <IIIT-B_logo.jpg, id=40, 185.69376pt x 173.64874pt>
+ <IIIT-B_logo.jpg, id=76, 185.69376pt x 173.64874pt>
 File: IIIT-B_logo.jpg Graphic file (type jpg)
 
 <use IIIT-B_logo.jpg>
@@ -665,57 +668,90 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.39 \newpage
-              [1] [2] [3]
-<flowcharts/basicflow.jpg, id=78, 632.3625pt x 643.40375pt>
+              [1] [2]
+<flowcharts/linkaddition.jpg, id=123, 380.42125pt x 241.90375pt>
+File: flowcharts/linkaddition.jpg Graphic file (type jpg)
+
+<use flowcharts/linkaddition.jpg>
+Package pdftex.def Info: flowcharts/linkaddition.jpg used on input line 74.
+(pdftex.def)             Requested size: 312.00119pt x 198.40295pt.
+ [3 <./flowcharts/linkaddition.jpg>]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 87.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `superscript' on input line 87.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 87.
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 92.
+(/usr/share/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 92.
+ [4] [5]
+<flowcharts/basicflow.jpg, id=138, 632.3625pt x 643.40375pt>
 File: flowcharts/basicflow.jpg Graphic file (type jpg)
 
 <use flowcharts/basicflow.jpg>
-Package pdftex.def Info: flowcharts/basicflow.jpg used on input line 75.
+Package pdftex.def Info: flowcharts/basicflow.jpg used on input line 116.
 (pdftex.def)             Requested size: 487.5pt x 496.02129pt.
 
-Overfull \hbox (97.5pt too wide) in paragraph at lines 75--76
+Overfull \hbox (97.5pt too wide) in paragraph at lines 116--117
  [][] 
  []
 
-[4 <./flowcharts/basicflow.jpg>]
-<flowcharts/backend.jpg, id=83, 816.04875pt x 462.72874pt>
+[6 <./flowcharts/basicflow.jpg>]
+<flowcharts/backend.jpg, id=145, 816.04875pt x 462.72874pt>
 File: flowcharts/backend.jpg Graphic file (type jpg)
 
 <use flowcharts/backend.jpg>
-Package pdftex.def Info: flowcharts/backend.jpg used on input line 86.
+Package pdftex.def Info: flowcharts/backend.jpg used on input line 127.
 (pdftex.def)             Requested size: 487.5pt x 276.432pt.
 
-Overfull \hbox (97.5pt too wide) in paragraph at lines 86--87
+Overfull \hbox (97.5pt too wide) in paragraph at lines 127--128
  [][] 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 91.
-[5 <./flowcharts/backend.jpg>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 91.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 132.
+[7 <./flowcharts/backend.jpg>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 132.
  (./sdd.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 91.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 91.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 132.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 132.
 Package rerunfilecheck Info: File `sdd.out' has not changed.
-(rerunfilecheck)             Checksum: 7EDC20DA64B36BFCEDAB23D675AB420C;548.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 91.
+(rerunfilecheck)             Checksum: 3B1037226C60BF3CF1BA955D074C0D03;1265.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 132.
  ) 
 Here is how much of TeX's memory you used:
- 6359 strings out of 493013
- 88436 string characters out of 6139318
- 177191 words of memory out of 5000000
- 9800 multiletter control sequences out of 15000+600000
- 11659 words of font info for 43 fonts, out of 8000000 for 9000
+ 6413 strings out of 493013
+ 89342 string characters out of 6139318
+ 178230 words of memory out of 5000000
+ 9838 multiletter control sequences out of 15000+600000
+ 13960 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,5n,28p,350b,356s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,5n,31p,449b,356s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mti12.pfb>
-Output written on sdd.pdf (6 pages, 162103 bytes).
+nts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
+/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmti12.pfb>
+Output written on sdd.pdf (8 pages, 207188 bytes).
 PDF statistics:
- 112 PDF objects out of 1000 (max. 8388607)
- 95 compressed objects within 1 object stream
- 20 named destinations out of 1000 (max. 500000)
- 88 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 189 PDF objects out of 1000 (max. 8388607)
+ 164 compressed objects within 2 object streams
+ 32 named destinations out of 1000 (max. 500000)
+ 165 words of extra memory for PDF output out of 10000 (max. 10000000)
 
