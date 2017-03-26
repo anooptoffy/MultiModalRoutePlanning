@@ -1,17 +1,27 @@
 import os
 import csv
-from math import radians, cos, sin, asin, sqrt
+from math import radians, cos, sin, asin, sqrt, inf
+import json
+from pprint import pprint
 
 '''
 data
 ├── bmrc data
 │   └── MetroStation.csv
+├── bmtc data_large
+│   ├── 1.unq_bus_stops.csv
+│   ├── 1.unq_bus_stops_header.csv
+│   ├── 2.bus_stations.csv
+│   ├── 2.bus_stations_header.csv
+│   ├── 3.bus_routes.csv
+│   └── 3.bus_routes_header.csv
 ├── bmtc data
 │   ├── 1.unq_bus_stops.csv
 │   ├── 1.unq_bus_stops_header.csv
 │   ├── 2.bus_stations.csv
 │   ├── 2.bus_stations_header.csv
-│   └── 3.bus_routes.csv
+│   ├── 3.bus_routes.csv
+│   └── 3.bus_routes_header.csv
 
 '''
 
@@ -20,10 +30,14 @@ class MutltiModalRoute:
 
     def __init__(self):
         self.path = os.listdir("../data/bmtc data")
-        self.unique_bust_stops = dict() # dict for storing unique
+        self.unq_bus_stops = dict() # dict for storing unique
                                         # bus stops
+        self.longitude = '' # India 20.5937° N longitude, 78.9629°
+        # E latitude
+        self.latitude = ''
         self.uniq_bust_routes = dict()
-        self.unique_bust_stops_2 = dict() # verification dict()
+        self.unq_bus_stops_2 = dict() # verification dict()
+        self.adj_matrix = []
 
     def haversine(self, lon1, lat1, lon2, lat2):
         """
@@ -43,91 +57,137 @@ class MutltiModalRoute:
         r = 6371  # Radius of earth in kilometers. Use 3956 for miles
         return c * r
 
-    def main(self):
-        ''' Main function  '''
-        self.path = sorted(self.path)
-        print(self.path)
-        with open("../data/bmtc data/"+self.path[0], 'rt',
-                  encoding='utf-8') \
-                as \
-                csvfile:
-            readfile = csv.reader(csvfile, delimiter=',')
-            #
-            # ^^^^^^^data cleaning, some ascii in between utf-8
-            # encoded file ^^^^^^^^^
-            #
-            # UnicodeDecodeError:
-            #           'utf-8' codec can't decode byte 0xa0 in position 2980:
-            #            invalid start byte
-            #
-            # Solution:
-            #
-            # Got rid of the error by opening it in Libre office
-            # and saving it as Text CVS format with encoding utf-8
-            #
-            count = 0
-            for row in readfile:
-                #print(', '.join(row))
-                self.unique_bust_stops[row[1]] = count
-                count += 1
-        #print(self.path)
-        #print(self.unique_bust_stops)
-        print(len(self.unique_bust_stops), " Unique bus tops")
-
-        with open("../data/bmtc data/"+self.path[2],'rt',
+    def create_route_json(self):
+        bus_route_name = dict()
+        bus_route_origin = dict()
+        bus_route_destination = dict()
+        json_data = ''
+        with open("../data/bmtc data/" + self.path[4], 'rt',
                   encoding='utf-8') as csvfile:
             readfile = csv.reader(csvfile, delimiter=',')
             count = 0
             for row in readfile:
-                #print(', '.join(row))
-                if self.uniq_bust_routes.get(row[4]) == None:
-                    self.uniq_bust_routes[row[4]] = 1
-                else:
-                    self.uniq_bust_routes[row[4]] += 1
-                self.unique_bust_stops_2[row[3]] = count
-                count += 1
+                # print(', '.join(row))
+                bus_route_name[row[0]] = 0
+                bus_route_origin[row[2]] = 0
+                bus_route_destination[row[3]] = 0
+                json_data = row[7]
+                with open("data_json/" + row[0], 'w') as \
+                        outfile:
+                    outfile.write(json_data)
 
-        print(len(self.uniq_bust_routes), " Unique routes")
-        #print(len(self.unique_bust_stops_2))
-        #print(len(self.unique_bust_stops))
+        print(len((bus_route_name)))
+        print(len(bus_route_origin))
+        print(len(bus_route_destination))
+        print(json_data)
 
-        #print(self.uniq_bust_routes)
+        return
 
-        #
-        # calculate distance between origin and destination
-        #
+    def main(self):
+        ''' Main function  '''
+        self.path = sorted(self.path)
 
-        dis = 0
-        with open("../data/bmtc data/"+self.path[2], 'rt',
+        # read all the bus stops
+        with open("../data/bmtc data/" + self.path[0], 'rt',
                   encoding= 'utf-8') as csvfile:
             readfile = csv.reader(csvfile, delimiter = ',')
             count = 0
             for row in readfile:
-                #print(row[4])
-                if '263P' == row[4]:
-                    print(','.join(row))
+                #print(', '.join(row))
+                self.unq_bus_stops[row[1]] = [count]
+                count += 1
+
+        with open("../data/bmtc data/" +  self.path[2],
+                  'rt', encoding='utf-8') as csvfile:
+            readfile = csv.reader(csvfile, delimiter = ',')
+            for row in readfile:
+                #print(', '.join(row))
+                self.longitude = row[1]
+                self.latitude = row[2]
+                if self.uniq_bust_routes.get(row[4]) == None:
+                    self.uniq_bust_routes[row[4]] = 1
                 else:
-                    break
-
-        dis = self.haversine(13.0455367265411,77.5055545144687,13.0408676171254,77.504874711254)
-        dis += self.haversine(13.0408676171254,77.504874711254, 13.0386169338844,77.5045504332105)
-        dis += self.haversine(13.0386169338844,77.5045504332105, 13.0336009734817,77.5041360893561)
-        dis += self.haversine(13.0336009734817,77.5041360893561, 13.0314991383208,77.5035461729168)
-        dis += self.haversine(13.0314991383208,77.5035461729168, 13.0276026982709,77.4936370371092)
-        dis += self.haversine(13.0276026982709,77.4936370371092,13.0281844260398,77.4895871820463)
-        dis += self.haversine(13.0281844260398,77.4895871820463, 13.0293636453365,77.4836860839008)
-        dis += self.haversine(13.0293636453365,77.4836860839008, 13.026171634,77.4731424451)
-        dis += self.haversine(13.026171634,77.4731424451,13.0216765859596,77.4676410511072 )
-        dis += self.haversine(13.0216765859596,77.4676410511072,13.03777311,77.4612450041 )
-        dis += self.haversine(13.03777311,77.4612450041, 13.0453056260008,77.4613212145148)
-        dis += self.haversine(13.0453056260008,77.4613212145148, 13.0493558943,77.4599098507)
-        dis += self.haversine(13.0493558943,77.4599098507,13.0572077681152,77.4601837299526 )
-        dis += self.haversine(13.0572077681152,77.4601837299526,13.0606236868,77.461264031 )
-        print(dis)
-        return
+                    self.uniq_bust_routes[row[4]] += 1
+                if len(self.unq_bus_stops[row[3]]) == 1:
+                    self.unq_bus_stops[row[3]].append([self.longitude,
+                                            self.latitude])
 
 
+        #for key in self.unq_bus_stops:
+            # print("Bus Stop " , key , "ID long latit",
+            #       self.unq_bus_stops[key])
+            # print(self.unq_bus_stops[key][0])
+            # print(self.unq_bus_stops[key][1])
 
+        print(self.unq_bus_stops['8th mile t dasarahalli 8th mile '
+                                 'beside a.k.scooter works'][1])
+        print(self.uniq_bust_routes)
+
+
+        for mat in range(len(self.unq_bus_stops)):
+            row = []
+            for r in range(len(self.unq_bus_stops)):
+                row.append(inf)
+            self.adj_matrix.append(row)
+
+        # adding paths to the adjacency matrix
+        with open("../data/bmtc data/" + self.path[2], 'rt',
+                  encoding='utf-8') as csvfile:
+            readfile = csv.reader(csvfile, delimiter=',')
+            prev_route = 0
+            next_route = 1
+            prev_stop = 0
+            next_stop = 1
+            count = 0
+            for row in readfile:
+                next_route = row[4]
+                next_stop = row[3]
+                if prev_route == next_route:
+                    long1 = float(self.unq_bus_stops[
+                                      prev_stop][1][0])
+                    latit1 = float(self.unq_bus_stops[
+                                       prev_stop][1][1])
+                    long2 = float(self.unq_bus_stops[
+                                      next_stop][1][0])
+                    latit2 = float(self.unq_bus_stops[
+                                       next_stop][1][1])
+                    self.adj_matrix[self.unq_bus_stops[prev_stop][0]][
+                        self.unq_bus_stops[next_stop][0]] = self.haversine(long1, latit1,
+                                                     long2, latit2)
+
+                    self.adj_matrix[self.unq_bus_stops[next_stop][0]][
+                        self.unq_bus_stops[prev_stop][0]] = self.haversine(
+                        long1, latit1,
+                                                     long2, latit2)
+                    prev_stop = row[3]
+
+                else:
+                    prev_route = row[4]
+                    prev_stop = row[3]
+
+
+        # verification
+        print(self.adj_matrix[self.unq_bus_stops['8th mile t dasarahalli 8th mile '
+                                 'beside a.k.scooter works'][0]][self.unq_bus_stops['rukmini nagara rukmini nagara beside open area'][0]])
+        print(self.adj_matrix[self.unq_bus_stops['rukmini nagara rukmini nagara beside open area'][0]][self.unq_bus_stops['8th mile t dasarahalli 8th mile beside a.k.scooter works'][0]])
+
+        print(self.haversine(float(self.unq_bus_stops['8th mile t '
+                                                 'dasarahalli 8th mile '
+                                 'beside a.k.scooter works'][1][
+                                       0]), float(self.unq_bus_stops[
+            '8th mile t dasarahalli 8th mile '
+                                 'beside a.k.scooter works'][1][1]),
+                             float(self.unq_bus_stops['rukmini '
+                                                      'nagara '
+                                                'rukmini nagara '
+                                                'beside open '
+                                                'area'][1][0]),
+                             float(self.unq_bus_stops['rukmini '
+                                                      'nagara '
+                                                'rukmini nagara '
+                                                'beside open '
+                                                'area'][1][1])))
 if __name__ == '__main__':
     route = MutltiModalRoute()
+    #route.create_route_json() # call only once
     route.main()
