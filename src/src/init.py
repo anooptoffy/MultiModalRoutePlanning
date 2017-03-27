@@ -8,13 +8,6 @@ from pprint import pprint
 data
 ├── bmrc data
 │   └── MetroStation.csv
-├── bmtc data_large
-│   ├── 1.unq_bus_stops.csv
-│   ├── 1.unq_bus_stops_header.csv
-│   ├── 2.bus_stations.csv
-│   ├── 2.bus_stations_header.csv
-│   ├── 3.bus_routes.csv
-│   └── 3.bus_routes_header.csv
 ├── bmtc data
 │   ├── 1.unq_bus_stops.csv
 │   ├── 1.unq_bus_stops_header.csv
@@ -171,22 +164,23 @@ class MutltiModalRoute:
                                  'beside a.k.scooter works'][0]][self.unq_bus_stops['rukmini nagara rukmini nagara beside open area'][0]])
         print(self.adj_matrix[self.unq_bus_stops['rukmini nagara rukmini nagara beside open area'][0]][self.unq_bus_stops['8th mile t dasarahalli 8th mile beside a.k.scooter works'][0]])
 
-        print(self.haversine(float(self.unq_bus_stops['8th mile t '
-                                                 'dasarahalli 8th mile '
-                                 'beside a.k.scooter works'][1][
-                                       0]), float(self.unq_bus_stops[
-            '8th mile t dasarahalli 8th mile '
-                                 'beside a.k.scooter works'][1][1]),
-                             float(self.unq_bus_stops['rukmini '
-                                                      'nagara '
-                                                'rukmini nagara '
-                                                'beside open '
-                                                'area'][1][0]),
-                             float(self.unq_bus_stops['rukmini '
-                                                      'nagara '
-                                                'rukmini nagara '
-                                                'beside open '
-                                                'area'][1][1])))
+        print(self.adj_matrix[0])
+        # print(self.haversine(float(self.unq_bus_stops['8th mile t '
+        #                                          'dasarahalli 8th mile '
+        #                          'beside a.k.scooter works'][1][
+        #                                0]), float(self.unq_bus_stops[
+        #     '8th mile t dasarahalli 8th mile '
+        #                          'beside a.k.scooter works'][1][1]),
+        #                      float(self.unq_bus_stops['rukmini '
+        #                                               'nagara '
+        #                                         'rukmini nagara '
+        #                                         'beside open '
+        #                                         'area'][1][0]),
+        #                      float(self.unq_bus_stops['rukmini '
+        #                                               'nagara '
+        #                                         'rukmini nagara '
+        #                                         'beside open '
+        #                                         'area'][1][1])))
 if __name__ == '__main__':
     route = MutltiModalRoute()
     #route.create_route_json() # call only once
