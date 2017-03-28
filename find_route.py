@@ -1,4 +1,4 @@
-#This is a brute a attempt to check if algo works
+#This is a brute attempt to check if algo works
 #It will be polished asap
 
 
