@@ -188,12 +188,10 @@ def index(request):
         heuristic)
         print(result)
 
-        textMessage = ''
         for r in range(len(result)):
             print(result[r]+"- "+", ".join(node_routes[result[r]]))
-            textMessage += '-> ' + request[r]
 
-
+        textMessage  = '-> '.join(result)
         #find_route(result)
 
     return render(request, 'home/index.html', {'form' : form,
