@@ -25,7 +25,7 @@ SECRET_KEY = '^fssx=+=#nipe_theou(=+v8yyxijvtumf-$ke-z$qp&9x8pqn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
