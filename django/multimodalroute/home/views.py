@@ -212,6 +212,17 @@ def index(request):
                 prev_stop = row[3]
 
 
+    for key_metro in metro_loc.keys():
+        for key_bus in node_loc.keys():
+            wt = haversine(float(metro_loc[key_metro][0]),
+                           float(metro_loc[key_metro][1]),
+                           float(node_loc[key_bus][0]),
+                           float(node_loc[key_bus][1]))
+            if wt < 5.0:
+                G.add_edge((key_metro, key_bus), wt= wt)
+
+
+
     if 'source' not in request.POST:
         form = SubmitForm()
         textMessage = "Form Not Submitted"
