@@ -133,13 +133,23 @@ def index(request):
     G = pygraph.classes.graph.graph()
     # G = pygraph.classes.digraph.digraph()
 
+    # reading bus stops
     node_loc = pickle.load(open("home/static/home/bus_stops_loc.json",
                                 "rb"))
+
+
+    # reading metro info
+    metro_loc = pickle.load(open(
+        "home/static/home/metro_stops_loc.json","rb"))
+
     print(type(node_loc))
 
     node_routes = pickle.load(open(
         "home/static/home/bus_stops_routes_bmtc.json",
         "rb"))
+    metro_routes = pickle.load(open(
+        "home/static/home/metro_routes.json","rb"))
+
     print(type(node_routes))
 
     # Adding nodes to the graph
@@ -147,6 +157,11 @@ def index(request):
         G.add_node(key, attrs=[('position', node_loc[key]), ("routes",
                                                              node_routes[
                                                                  key])])
+
+    for key in metro_loc.keys():
+        G.add_node(key, attrs=[('position', metro_loc[key]),
+                               ("routes", metro_routes[key])])
+
 
     # Adding edges
     with open("home/static/home/2.bus_stations.csv", 'rt',
@@ -173,6 +188,29 @@ def index(request):
                 prev_stop = row[3]
 
 
+    with open("home/static/home/MetroStation.csv", 'rt', encoding=
+    'utf-8') as csvfile:
+        readfile = csv.reader(csvfile, delimiter=',')
+        prev_route = 0
+        next_route = 1
+        prev_stop = 0
+        next_stop = 1
+        for row in readfile:
+            next_route = row[4]
+            next_stop = row[3]
+            if prev_route ==  next_route:
+                long1 = float(metro_loc[prev_stop][0])
+                latit1 = float(metro_loc[prev_stop][1])
+                long2 = float(metro_loc[next_stop][0])
+                latit2 = float(metro_loc[next_stop][1])
+                wt = haversine(long1, latit1, long2, latit2)
+                if not G.has_edge((prev_stop, next_stop)):
+                    G.add_edge((prev_stop, next_stop), wt= wt)
+                prev_stop = row[3]
+            else:
+                prev_route = row[4]
+                prev_stop = row[3]
+
 
     if 'source' not in request.POST:
         form = SubmitForm()
@@ -189,7 +227,7 @@ def index(request):
         print(result)
 
         for r in range(len(result)):
-            print(result[r]+"- "+", ".join(node_routes[result[r]]))
+            print(result[r]+"- "+", ".join(result[r]))
 
         textMessage  = '-> '.join(result)
         #find_route(result)
