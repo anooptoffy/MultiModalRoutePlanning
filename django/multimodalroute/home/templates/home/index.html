@@ -9,6 +9,24 @@
 
     </script>
 
+    <style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
 
@@ -34,7 +52,32 @@
 
 </div>
 <div>
-    <h1>{{Message}}</h1>
+    <!--- <h1>{{Message}}</h1> --->
+<br/>
+    <br/>
+
+    <table border="1|0">
+<tr>
+  <th> Source </th>
+  <th> Destination </th>
+  <th> Bus </th>
+    <th> Distance (in Kms.) </th>
+</tr>
+{% for key, value in output.items %}
+<tr>
+  <td>{{ key }}</td>
+  <td>{{ value }}</td>
+  <td>{{ routes|get_item:value| joinby:", " }}</td>
+    <td>{{ idistance|get_item:key|floatformat:"-3" }}</td>
+</tr>
+{% endfor %}
+</table>
+
+    <h1>Total Distance : {{ distance|floatformat:"-3" }} Kms. </h1>
+
+    <h2>*Metro1: Green Line, *Metro2 : Purple Line</h2>
+
+    <h1>{{ Message }}</h1>
 </div>
 </body>
 </html>

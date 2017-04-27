@@ -1,0 +1,93 @@
+print(len(result[0]))
+        print(len(result[1]))
+        src = request.POST['source']
+        # start = src
+        # s_route = set(combined_routes[src])
+        path.append(src)
+        print(src)
+        wt = 0.0
+        while(src):
+            # n_routes = set(combined_routes[result[0][src]])
+            # n_routes = n_routes & s_route
+            # if n_routes:
+            #     c = 1
+            # else:
+
+            output[src] = result[0][src]
+            wt = haversine(float(combined_locs[src][0]),
+                           float(combined_locs[src][1]),
+                           float(combined_locs[result[0][src]][0]),
+                           float(combined_locs[result[0][src]][1]))
+            distance[src] = wt
+            src = result[0][src]
+            path.append(src)
+
+            if src == None:
+                textMessage = "Unreachable"
+                print("Unreachable")
+                break
+            print(" " + src)
+            if src == request.POST['destination']:
+                break
+
+        print(result[1][request.POST['destination']])
+
+
+
+
+print(len(result[0]))
+        print(len(result[1]))
+        src = request.POST['source']
+        start = src
+        s_route = set(combined_routes[src])
+        routes = {}
+        path.append(src)
+        print(src)
+        wt = 0.0
+        while(src):
+
+	    if src == None:
+                textMessage = "Unreachable"
+                print("Unreachable")
+                break
+
+            if src == request.POST['destination']:
+                break
+            n_routes = set(combined_routes[result[0][src]])
+            n_routes = n_routes & s_route
+            
+
+            if n_routes:
+                wt += haversine(float(combined_locs[src][0]),
+                               float(combined_locs[src][1]),
+                               float(
+                                   combined_locs[result[0][src]][0]),
+                               float(
+                                   combined_locs[result[0][src]][1]))
+                src = result[0][src]
+                print(" " + src)
+                if src == request.POST['destination']:
+
+		    output[start] = src
+    	            distance[start] = wt
+		    routes[src] = s_route
+                    break
+                s_route = n_routes
+            else:                
+                output[start] = src
+                routes[src] = s_route
+                path.append(src)
+                distance[start] = wt
+                start = src
+                s_route = set(combined_routes[start])
+                src = result[0][src]
+                wt = haversine(float(combined_locs[src][0]),
+                                float(combined_locs[src][1]),
+                                float(
+                                    combined_locs[result[0][src]][0]),
+                                float(
+                                    combined_locs[result[0][src]][1]))
+                print(" " + src)
+
+
+        print(result[1][request.POST['destination']])

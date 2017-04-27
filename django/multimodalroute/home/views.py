@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
 from .forms import SubmitForm
+import django_tables2 as tables
+from django.template.defaulttags import register
 
 import pygraph
 from pygraph.classes.graph import graph
@@ -104,34 +106,19 @@ def haversine(lon1, lat1, lon2, lat2):
     return c * r
 
 
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
 
-def find_route(mypath):
-    j=len(mypath)
-    start = mypath[0]
-    res=set(node_routes[start])
-    i=1
-    while i<j:
-        n_res=set(node_routes[mypath[i]])&res
-        if n_res:
-            c=1
-        else:
-            stop=mypath[i-1]
-            print (start+"      "+"->"+stop+":",res)
-            print ("change bus")
-            start=stop
-            n_res=set(node_routes[start])
-            i=i-1
-        i+=1
-        res = n_res
-    stop=mypath[i-1]
-    print (start + "->" + stop + ":", res)
-
-
+@register.filter
+def joinby(value, arg):
+    return arg.join(value)
 
 def index(request):
     # creating a graph
     G = pygraph.classes.graph.graph()
     # G = pygraph.classes.digraph.digraph()
+
 
     # reading bus stops
     node_loc = pickle.load(open("home/static/home/bus_stops_loc.json",
@@ -142,7 +129,8 @@ def index(request):
     metro_loc = pickle.load(open(
         "home/static/home/metro_stops_loc.json","rb"))
 
-    print(type(node_loc))
+    #print(type(node_loc))
+    #print(type(metro_loc))
 
     node_routes = pickle.load(open(
         "home/static/home/bus_stops_routes_bmtc.json",
@@ -150,7 +138,22 @@ def index(request):
     metro_routes = pickle.load(open(
         "home/static/home/metro_routes.json","rb"))
 
-    print(type(node_routes))
+    combined_routes = OrderedDict()
+    for k, e in node_routes.items():
+        combined_routes[k] = e
+
+    for k, e in metro_routes.items():
+        combined_routes[k] = [e]
+
+    combined_locs = OrderedDict()
+    for k, e in node_loc.items():
+        combined_locs[k] = e
+
+    for k, e in metro_loc.items():
+        combined_locs[k] = e
+
+    #print(type(node_routes))
+    #print(type(metro_routes))
 
     # Adding nodes to the graph
     for key in node_loc.keys():
@@ -218,33 +221,110 @@ def index(request):
                            float(metro_loc[key_metro][1]),
                            float(node_loc[key_bus][0]),
                            float(node_loc[key_bus][1]))
-            if wt < 5.0:
+            if wt < 1.0:
                 G.add_edge((key_metro, key_bus), wt= wt)
+            #else :
+                #G.add_edge((key_metro, key_bus), wt = 10000)
 
 
 
     if 'source' not in request.POST:
         form = SubmitForm()
-        textMessage = "Form Not Submitted"
+        output = {}
+        textMessage = ""
+        return render(request, 'home/index.html', {
+            'form': form,
+            'output': output,
+            'Message': textMessage})
+    elif request.POST['source'] == request.POST['destination']:
+        form = SubmitForm()
+        output = {}
+        textMessage = "**** Please choose a different source and " \
+                      "destination pairs ****"
+        return render(request, 'home/index.html', {
+            'form': form,
+            'output': output,
+            'Message' : textMessage})
     else:
         form = SubmitForm()
-        heuristic = euclidean()
-        heuristic.optimize(G)
+        textMessage = ""
+        #heuristic = euclidean()
+        #heuristic.optimize(G)
 
         # result = pygraph.algorithms.minmax.heuristic_search(G,'electronic city wipro gate','infosys parking lot', heuristic)
-        result = pygraph.algorithms.minmax.heuristic_search(G,
-        request.POST['source'],request.POST['destination'],
-        heuristic)
-        print(result)
+        #result = pygraph.algorithms.minmax.heuristic_search(G,
+        #request.POST['source'],request.POST['destination'],
+        #heuristic)
+        result = pygraph.algorithms.minmax.shortest_path(G,
+                                                         request.POST['destination'])
 
-        for r in range(len(result)):
-            print(result[r]+"- "+", ".join(result[r]))
+        distance = {}
+        totalDistance = 0.0
+        output = {}
+        path = []
 
-        textMessage  = '-> '.join(result)
-        #find_route(result)
+        print(len(result[0]))
+        print(len(result[1]))
+        src = request.POST['source']
+        start = src
+        s_route = set(combined_routes[src])
+        routes = {}
+        path.append(src)
+        print(src)
+        wt = 0.0
+        while (src):
 
-    return render(request, 'home/index.html', {'form' : form,
-                                               'Message' : textMessage })
+            if src == None:
+                textMessage = "Unreachable"
+                print("Unreachable")
+                break
+
+            if src == request.POST['destination']:
+                break
+            n_routes = set(combined_routes[result[0][src]])
+            n_routes = n_routes & s_route
+            wt += haversine(float(combined_locs[src][0]),
+                            float(combined_locs[src][1]),
+                            float(
+                                combined_locs[result[0][src]][0]),
+                            float(
+                                combined_locs[result[0][src]][1]))
+            if n_routes:
+
+                src = result[0][src]
+                print(" " + src)
+                if src == request.POST['destination']:
+                    output[start] = src
+                    distance[start] = wt
+                    routes[src] = n_routes
+                    break
+                s_route = n_routes
+            else:
+                output[start] = src
+                routes[src] = s_route
+                path.append(src)
+                distance[start] = wt
+                start = src
+                s_route = set(combined_routes[start])
+                src = result[0][src]
+                wt = 0.0
+                print(" " + src)
+
+        print(result[1][request.POST['destination']])
+        print(path)
+        totalDistance = result[1][request.POST['source']]
+        outputKey = reversed(list(output.keys()))
+
+        return render(request, 'home/index.html', {'form' : form,
+                                                   'out' : outputKey,
+                                               'output' : output,
+                                               'distance' :
+                                                       totalDistance,
+                                                   'idistance' :
+                                                       distance,
+                                               'routes' :
+                                                       routes,
+                                                   'Message' : textMessage})
 
 
 

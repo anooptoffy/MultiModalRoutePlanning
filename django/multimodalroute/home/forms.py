@@ -31,9 +31,10 @@ class SubmitForm(forms.Form):
                                     widget=forms.Select(),
                                     required= True,
                                     help_text="Choose a destination from the list ")
-    algo_select = forms.ChoiceField(choices=algo,
-                                    label=u'Algorithm',
-                                  widget=forms.Select(), required=True)
-    how = forms.ChoiceField(choices=how_to, label=u'How To',
-                            widget=forms.Select(), required= True)
+    #algo_select = forms.ChoiceField(choices=algo,
+    #                                label=u'Algorithm',
+    #                              widget=forms.Select(), \
+    #                                      required=True)
+    #how = forms.ChoiceField(choices=how_to, label=u'How To',
+    #                        widget=forms.Select(), required= True)
 
