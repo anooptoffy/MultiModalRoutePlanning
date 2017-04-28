@@ -230,8 +230,8 @@ def index(request):
                            float(node_loc[key_bus][1]))
             if wt < 1.0:
                 G.add_edge((key_metro, key_bus), wt= wt)
-            #else :
-                #G.add_edge((key_metro, key_bus), wt = 10000)
+            else :
+                G.add_edge((key_metro, key_bus), wt = 10000)
 
 
 
@@ -273,51 +273,37 @@ def index(request):
         print(len(result[0]))
         print(len(result[1]))
         src = request.POST['source']
-        start = src
-        s_route = set(combined_routes[src])
-        routes = {}
+        # start = src
+        # s_route = set(combined_routes[src])
         path.append(src)
         print(src)
         wt = 0.0
         while (src):
+            # n_routes = set(combined_routes[result[0][src]])
+            # n_routes = n_routes & s_route
+            # if n_routes:
+            #     c = 1
+            # else:
+
+            output[src] = result[0][src]
+            wt = haversine(float(combined_locs[src][0]),
+                           float(combined_locs[src][1]),
+                           float(combined_locs[result[0][src]][0]),
+                           float(combined_locs[result[0][src]][1]))
+            distance[src] = wt
+            src = result[0][src]
+            path.append(src)
 
             if src == None:
                 textMessage = "Unreachable"
                 print("Unreachable")
                 break
-
+            print(" " + src)
             if src == request.POST['destination']:
                 break
-            n_routes = set(combined_routes[result[0][src]])
-            n_routes = n_routes & s_route
-            wt += haversine(float(combined_locs[src][0]),
-                            float(combined_locs[src][1]),
-                            float(
-                                combined_locs[result[0][src]][0]),
-                            float(
-                                combined_locs[result[0][src]][1]))
-            if n_routes:
-
-                src = result[0][src]
-                print(" " + src)
-                if src == request.POST['destination']:
-                    output[start] = src
-                    distance[start] = wt
-                    routes[src] = n_routes
-                    break
-                s_route = n_routes
-            else:
-                output[start] = src
-                routes[src] = s_route
-                path.append(src)
-                distance[start] = wt
-                start = src
-                s_route = set(combined_routes[start])
-                src = result[0][src]
-                wt = 0.0
-                print(" " + src)
 
         print(result[1][request.POST['destination']])
+
         print(path)
         totalDistance = result[1][request.POST['source']]
         outputKey = reversed(list(output.keys()))
@@ -330,7 +316,7 @@ def index(request):
                                                    'idistance' :
                                                        distance,
                                                'routes' :
-                                                       routes,
+                                                       combined_routes,
                                                    'Message' : textMessage})
 
 
