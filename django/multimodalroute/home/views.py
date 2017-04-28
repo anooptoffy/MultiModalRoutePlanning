@@ -22,6 +22,13 @@ from math import radians, cos, sin, asin, sqrt, inf
 from collections import OrderedDict
 import time
 
+from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
+from rest_framework.response import  Response
+from rest_framework import status
+from .models import Node
+from .serializers import NodeSerializer
+
 class euclidean(object):
     """
     A* heuristic for Euclidean graphs.
@@ -332,6 +339,17 @@ def index(request):
 
 
 
+# List all stocks or create a new one
+# node/
+class NodeList(APIView):
 
+    def get(self, request):
+        nodes = Node.objects.all()
+        serializer = NodeSerializer(nodes, many=True)
+        return Response(serializer.data)
+
+
+    def post(self):
+        pass
 
 
