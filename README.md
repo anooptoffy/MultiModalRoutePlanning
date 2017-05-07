@@ -2,6 +2,8 @@
 
 A multi modal route planner, MMRP or Intermodal journey planner allowes the traveller to find the optimal modes of transport by considering the fastest, least changes, with constraints to go via or to avoid specific way points.
 
+![Alt text](routing.png "Demo")
+
 # Objective of this Project
 
 Here we focus on developing a MMRP for Bangalore city by incorporating the Bus route data and Metro data. The data is gathered from BMTC and Bangalore Metro.
